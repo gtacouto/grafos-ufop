@@ -11,7 +11,7 @@ class Main {
     g1.addEdge(0, 4, 4);
 
     System.out.println(g1);
-    System.out.println(g1.degree(0));// 2
+    System.out.println("O grau é: " +g1.degree(0));// 2
     System.out.println("O nó que possui o maior grau é o: " + g1.highestDegree());
   }
 }
