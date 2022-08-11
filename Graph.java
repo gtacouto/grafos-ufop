@@ -9,7 +9,8 @@ public class Graph {
     this.adjMatrix = new int[numNodes][numNodes];
   }
 
-  public void addEdge(int source, int sink,int weight){
+  public void addEdge(int source, int sink, int weight) {
+    this.countEdges++;
     this.adjMatrix[source][sink] = weight;
   }
 
