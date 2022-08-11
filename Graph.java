@@ -32,4 +32,17 @@ public class Graph {
 
     return str;
   }
+
+  public int degree(int node) {
+    // Retorna o grau do nó node;
+    int degree = 0;
+
+    for (int j = 0; j < this.adjMatrix[node].length; j++) {
+      if (this.adjMatrix[node][j] != 0) {
+        degree++;
+      }
+    }
+
+    return degree;
+  }
 }
