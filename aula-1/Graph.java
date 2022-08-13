@@ -83,4 +83,16 @@ public class Graph {
      * }
      */
   }
+
+  public int lowestDegree() {
+    int hightTest2 = this.adjMatrix.length + 1;
+
+    for (int i = 0; i < this.adjMatrix.length; i++) {
+      if (this.degree(i) < hightTest2) {
+        hightTest2 = this.degree(i);
+      }
+    }
+
+    return hightTest2;
+  }
 }
