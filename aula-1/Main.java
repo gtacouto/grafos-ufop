@@ -9,7 +9,7 @@ class Main {
 
     // aula 1
     System.out.println(g1);
-    System.out.println("O grau é: " + g1.degree(0));// 2
+    System.out.println("O grau é: " + g1.degree(0)); 
     System.out.println("\nO maior grau é o: " + g1.highestDegree());
 
     // aula 2
