@@ -143,11 +143,11 @@ public class Graph {
     for (int i = 0; i < this.adjMatrix.length/2; i++) {
       for (int j = 0; j < this.adjMatrix[i].length/2; j++) {
         if(this.adjMatrix[i][j] != this.adjMatrix[j][i] ){
-          return false;
+          return true;
         }
       }
     }
     
-    return true;
+    return false;
   }
 }
