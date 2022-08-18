@@ -1,3 +1,31 @@
+// matAdj -> mais rápido, mas ocupa um espaço maior O(n).
+// listAdj -> ocupa menos espaço O(v + e).
+
+// Passeio -> qualquer conjunto de nós.
+// Trilha -> não é permitido repetir arestas.
+// Circuito -> não é permitido repetir arestas, começa e termina no mesmo nó.
+// Caminho -> Não pode repetir arestas ou nó.
+// Ciclo -> Não pode repetir arestas ou nó, começa e termina no mesmo nó.
+
+// Apresente uma trilha que não é caminho.
+
+// aresta -> ---------
+// nó -> (5)
+
+// Apresente um circuito que não é um ciclo.
+
+// Conexidade
+
+// Não orientado
+// Conexo -> consigo encontrar caminho para todos os nós.
+// Desconexo -> Tem pelo menos um nó que não consigo encontrar caminho para todos os nós.
+// aresta ponto | nó de ligação -> remoção aumenta numeros de componentes conexos(conjunto).
+
+// Orientado
+// f-conexo -> Existe caminho para todos pares de nós em ambos sentidos
+// sf-conexo -> é conexo ao desconsiderar a orientação de arestas.
+// desconexo -> é desconexo ao desconsiderar a orientação das arestas
+
 class Main {
   public static void main(String[] args) {
     Graph g1 = new Graph(4);
@@ -9,7 +37,7 @@ class Main {
 
     // aula 1
     System.out.println(g1);
-    System.out.println("O grau é: " + g1.degree(0)); 
+    System.out.println("O grau é: " + g1.degree(0));
     System.out.println("\nO maior grau é o: " + g1.highestDegree());
 
     // aula 2
