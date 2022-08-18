@@ -85,7 +85,9 @@ class Main {
     Graph g5 = new Graph(4);
 
     g5.addEdge(0, 3, 1);
+    g5.addEdge(3, 0, 1);
     g5.addEdge(1, 0, 1);
+    g5.addEdge(0, 1, 1);
 
     System.out.println(g5);
     System.out.println(g5.density());
