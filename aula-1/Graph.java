@@ -126,4 +126,28 @@ public class Graph {
     return true;
   }
 
+  public float density() {
+    // E = quantidade de arestas que tem
+    // M = maximo de arestas possíveis()
+    // E / (M*(M-1))
+
+    float e = this.countEdges;
+    float m = this.countNodes;
+
+    return e / (m * (m - 1));
+  }
+
+  public boolean oriented() {
+    // retorna true se o grafo é orientado
+    
+    for (int i = 0; i < this.adjMatrix.length/2; i++) {
+      for (int j = 0; j < this.adjMatrix[i].length/2; j++) {
+        if(this.adjMatrix[i][j] != this.adjMatrix[j][i] ){
+          return false;
+        }
+      }
+    }
+    
+    return true;
+  }
 }
