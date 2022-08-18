@@ -26,6 +26,9 @@
 // sf-conexo -> é conexo ao desconsiderar a orientação de arestas.
 // desconexo -> é desconexo ao desconsiderar a orientação das arestas
 
+//conectividade de vertices -> minimo de nós q devo remover pra ser um grafo desconexo. k(G) =
+//conectividade de arestas -> minimo de arestas q devo remover pra ser um grafo desconexo.λ(G) =
+
 class Main {
   public static void main(String[] args) {
     Graph g1 = new Graph(4);
