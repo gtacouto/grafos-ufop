@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Graph {
   private int countNodes;
   private int countEdges;
@@ -139,15 +141,32 @@ public class Graph {
 
   public boolean oriented() {
     // retorna true se o grafo é orientado
-    
-    for (int i = 0; i < this.adjMatrix.length/2; i++) {
-      for (int j = 0; j < this.adjMatrix[i].length/2; j++) {
-        if(this.adjMatrix[i][j] != this.adjMatrix[j][i] ){
+
+    for (int i = 0; i < this.adjMatrix.length / 2; i++) {
+      for (int j = 0; j < this.adjMatrix[i].length / 2; j++) {
+        if (this.adjMatrix[i][j] != this.adjMatrix[j][i]) {
           return true;
         }
       }
     }
-    
+
     return false;
+  }
+
+  public int[] busca_largura(int origem) {
+    int arrayAux[] = new int[this.adjMatrix.length];
+    ArrayList<int> Q = new ArrayList<int>();
+    ArrayList<int> R = new ArrayList<int>();
+
+    Q.add(origem);
+    R.add(origem);
+
+    for (int i = 0; i < this.adjMatrix.length; i++) {
+      int u = Q[0];
+      Q.shift();
+
+    }
+
+    return R;
   }
 }
