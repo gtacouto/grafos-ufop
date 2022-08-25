@@ -22,6 +22,18 @@ public class Graph {
     this.adjMatrix[source][sink] = weight;
   }
 
+  public void addEdgeUnoriented(int source, int sink, int weight) {
+    if (source < 0 || source >= this.adjMatrix.length || sink < 0 || sink >= this.adjMatrix.length || weight <= 0) {
+      System.err.println("Invalid edge!\nsource: " + source + "\nsink: " + sink + "\nweight: " + weight);
+
+      return;
+    }
+
+    this.countEdges += 2;
+    this.adjMatrix[source][sink] = weight;
+    this.adjMatrix[sink][source] = weight;
+  }
+
   public String toString() {
     String str = "";
 
@@ -153,17 +165,26 @@ public class Graph {
     return false;
   }
 
-  public int[] busca_largura(int origem) {
+  public ArrayList<Integer> busca_largura(int origem) {
     int arrayAux[] = new int[this.adjMatrix.length];
-    ArrayList<int> Q = new ArrayList<int>();
-    ArrayList<int> R = new ArrayList<int>();
+    ArrayList<Integer> Q = new ArrayList<Integer>();
+    ArrayList<Integer> R = new ArrayList<Integer>();
 
     Q.add(origem);
     R.add(origem);
+    arrayAux[origem] = 1;
 
-    for (int i = 0; i < this.adjMatrix.length; i++) {
-      int u = Q[0];
-      Q.shift();
+    while (Q.size() > 0) {
+      int u = Q.get(0);
+      Q.remove(0);
+
+      for (int v = 0; v < arrayAux.length; v++) {
+        if (this.adjMatrix[u][v] != 0 && arrayAux[v] == 0) {
+          Q.add(v);
+          R.add(v);
+          arrayAux[v] = 1;
+        }
+      }
 
     }
 
