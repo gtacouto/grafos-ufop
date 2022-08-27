@@ -99,5 +99,6 @@ class Main {
     System.out.println(g5.busca_largura(1));
     System.out.println(g5.connected());
     System.out.println(g5.busca_profundidade(2));
+    System.out.println(g5.dfs_rec(2));
   }
 }

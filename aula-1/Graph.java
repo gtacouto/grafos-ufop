@@ -237,4 +237,26 @@ public class Graph {
     return R;
   }
 
+  public ArrayList<Integer> dfs_rec_aux(int u, int[] desc, ArrayList<Integer> R) {
+    desc[u] = 1;
+
+    R.add(u);
+
+    for (int v = 0; v < desc.length; v++) {
+      if (this.verifyFlow(desc, u, v)) {
+        dfs_rec_aux(v, desc, R);
+      }
+    }
+
+    return R;
+  }
+
+  public ArrayList<Integer> dfs_rec(int s) {
+    int desc[] = new int[this.adjMatrix.length];
+    ArrayList<Integer> R = new ArrayList<Integer>();
+
+    dfs_rec_aux(s, desc, R);
+
+    return R;
+  }
 }
