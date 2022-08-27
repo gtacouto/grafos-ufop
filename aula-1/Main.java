@@ -84,18 +84,20 @@ class Main {
 
     Graph g5 = new Graph(8);
 
-    g5.addEdgeUnoriented(4, 5, 1);
-    g5.addEdgeUnoriented(4, 0, 1);
-    g5.addEdgeUnoriented(4, 3, 1);
-    g5.addEdgeUnoriented(0, 6, 1);
     g5.addEdgeUnoriented(6, 1, 1);
-    g5.addEdgeUnoriented(3, 2, 1);
-    g5.addEdgeUnoriented(3, 7, 1);
+    g5.addEdgeUnoriented(6, 7, 1);
+    g5.addEdgeUnoriented(6, 3, 1);
+    g5.addEdgeUnoriented(3, 4, 1);
+    g5.addEdgeUnoriented(7, 0, 1);
+    g5.addEdgeUnoriented(0, 5, 1);
+    g5.addEdgeUnoriented(1, 2, 1);
 
     System.out.println("\nGrafo 5:");
     System.out.println(g5);
     // System.out.println(g5.density());
     // System.out.println(g5.oriented());
-    System.out.println(g5.busca_largura(4));
+    System.out.println(g5.busca_largura(1));
+    System.out.println(g5.connected());
+    System.out.println(g5.busca_profundidade(2));
   }
 }

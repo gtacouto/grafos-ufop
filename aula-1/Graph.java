@@ -165,24 +165,32 @@ public class Graph {
     return false;
   }
 
+  private boolean verifyFlow(int desc[], int u, int v) {
+    if (this.adjMatrix[u][v] != 0 && desc[v] == 0) {
+      return true;
+    }
+
+    return false;
+  }
+
   public ArrayList<Integer> busca_largura(int origem) {
-    int arrayAux[] = new int[this.adjMatrix.length];
+    int desc[] = new int[this.adjMatrix.length];
     ArrayList<Integer> Q = new ArrayList<Integer>();
     ArrayList<Integer> R = new ArrayList<Integer>();
 
     Q.add(origem);
     R.add(origem);
-    arrayAux[origem] = 1;
+    desc[origem] = 1;
 
     while (Q.size() > 0) {
       int u = Q.get(0);
       Q.remove(0);
 
-      for (int v = 0; v < arrayAux.length; v++) {
-        if (this.adjMatrix[u][v] != 0 && arrayAux[v] == 0) {
+      for (int v = 0; v < desc.length; v++) {
+        if (this.verifyFlow(desc, u, v)) {
           Q.add(v);
           R.add(v);
-          arrayAux[v] = 1;
+          desc[v] = 1;
         }
       }
 
@@ -190,4 +198,43 @@ public class Graph {
 
     return R;
   }
+
+  public boolean connected() {
+    return this.busca_largura(0).size() == this.adjMatrix.length;
+  }
+
+  public ArrayList<Integer> busca_profundidade(int s) {
+    int desc[] = new int[this.adjMatrix.length];
+    ArrayList<Integer> S = new ArrayList<Integer>();
+    ArrayList<Integer> R = new ArrayList<Integer>();
+
+    S.add(s);
+    R.add(s);
+    desc[s] = 1;
+
+    while (S.size() > 0) {
+      int u = S.get(S.size() - 1);
+
+      boolean in = false;
+
+      for (int v = 0; v < desc.length; v++) {
+        if (this.verifyFlow(desc, u, v)) {
+          S.add(v);
+          R.add(v);
+          desc[v] = 1;
+          in = true;
+
+          break;
+        }
+      }
+
+      if (in == false) {
+        S.remove(S.size() - 1);
+      }
+
+    }
+
+    return R;
+  }
+
 }
