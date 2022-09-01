@@ -1,6 +1,8 @@
 // matAdj -> mais rápido, mas ocupa um espaço maior O(n).
 // listAdj -> ocupa menos espaço O(v + e).
 
+// isomorfo -> contem no outro
+
 // Passeio -> qualquer conjunto de nós.
 // Trilha -> não é permitido repetir arestas.
 // Circuito -> não é permitido repetir arestas, começa e termina no mesmo nó.
@@ -28,9 +30,10 @@
 
 //conectividade de vertices -> minimo de nós q devo remover pra ser um grafo desconexo. k(G) =
 //conectividade de arestas -> minimo de arestas q devo remover pra ser um grafo desconexo.λ(G) =
+import java.io.IOException;
 
 class Main {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     Graph g1 = new Graph(4);
 
     g1.addEdge(0, 1, 1);
@@ -94,11 +97,26 @@ class Main {
 
     System.out.println("\nGrafo 5:");
     System.out.println(g5);
-    // System.out.println(g5.density());
-    // System.out.println(g5.oriented());
     System.out.println(g5.busca_largura(1));
     System.out.println(g5.connected());
     System.out.println(g5.busca_profundidade(2));
     System.out.println(g5.dfs_rec(2));
+    System.out.println(g5.ord_top());
+
+    String g6Path = "g6.txt";
+
+    Graph g6 = new Graph(g6Path);
+
+    System.out.println("\nGrafo 6:");
+    System.out.println(g6);
+    System.out.println(g6.ord_top());
+
+    String g7Path = "g7.txt";
+
+    Graph g7 = new Graph(g7Path);
+
+    System.out.println("\nGrafo 7:");
+    System.out.println(g7);
+    System.out.println(g7.ord_top());
   }
 }

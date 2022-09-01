@@ -1,4 +1,8 @@
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Graph {
   private int countNodes;
@@ -9,6 +13,36 @@ public class Graph {
     this.countNodes = numNodes;
     this.countEdges = 0;
     this.adjMatrix = new int[numNodes][numNodes];
+  }
+
+  public Graph(String fileName) throws IOException {
+    File file = new File(fileName);
+    FileReader reader = new FileReader(file);
+    BufferedReader bufferedReader = new BufferedReader(reader);
+
+    // Read header
+    String[] line = bufferedReader.readLine().split(" ");
+    this.countNodes = (Integer.parseInt(line[0]));
+    int fileLines = (Integer.parseInt(line[1]));
+
+    // Create and fill adjMatrix with read edges
+    this.adjMatrix = new int[this.countNodes][this.countNodes];
+
+    for (int i = 0; i < fileLines; ++i) {
+      String[] edgeInfo = bufferedReader.readLine().split(" ");
+
+      int source = Integer.parseInt(edgeInfo[0]);
+
+      int sink = Integer.parseInt(edgeInfo[1]);
+
+      int weight = Integer.parseInt(edgeInfo[2]);
+
+      addEdge(source, sink, weight);
+    }
+
+    bufferedReader.close();
+
+    reader.close();
   }
 
   public void addEdge(int source, int sink, int weight) {
@@ -74,28 +108,6 @@ public class Graph {
     }
 
     return hightTest2;
-
-    /*
-     * int values[] = new int[this.adjMatrix.length];
-     * 
-     * for (int i = 0; i < this.adjMatrix.length; i++) {
-     * int value = 0;
-     * for (int j = 0; j < this.adjMatrix[i].length; j++) {
-     * if (this.adjMatrix[i][j] != 0) {
-     * value++;
-     * }
-     * }
-     * values[i] = value;
-     * }
-     * 
-     * int hight = values[0];
-     * 
-     * for (int x = 0; x < values.length; x++) {
-     * if (values[x] > hight) {
-     * hight = values[x];
-     * }
-     * }
-     */
   }
 
   public int lowestDegree() {
@@ -237,7 +249,7 @@ public class Graph {
     return R;
   }
 
-  public ArrayList<Integer> dfs_rec_aux(int u, int[] desc, ArrayList<Integer> R) {
+  private void dfs_rec_aux(int u, int[] desc, ArrayList<Integer> R) {
     desc[u] = 1;
 
     R.add(u);
@@ -247,8 +259,6 @@ public class Graph {
         dfs_rec_aux(v, desc, R);
       }
     }
-
-    return R;
   }
 
   public ArrayList<Integer> dfs_rec(int s) {
@@ -256,6 +266,32 @@ public class Graph {
     ArrayList<Integer> R = new ArrayList<Integer>();
 
     dfs_rec_aux(s, desc, R);
+
+    return R;
+  }
+
+  private void ord_top_aux(int u, int[] desc, ArrayList<Integer> R) {
+    desc[u] = 1;
+
+    for (int v = 0; v < desc.length; v++) {
+      if (this.verifyFlow(desc, u, v)) {
+        ord_top_aux(v, desc, R);
+      }
+    }
+
+    R.add(0, u);
+  }
+
+  public ArrayList<Integer> ord_top() {
+    int desc[] = new int[this.adjMatrix.length];
+
+    ArrayList<Integer> R = new ArrayList<Integer>();
+
+    for (int v = 0; v < desc.length; v++) {
+      if (desc[v] == 0) {
+        ord_top_aux(v, desc, R);
+      }
+    }
 
     return R;
   }
