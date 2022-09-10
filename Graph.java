@@ -299,6 +299,25 @@ public class Graph {
   // componentes conexos
 
   // grafos tem ciclos
+  // def ciclo(self, s):
+  // """Retorna True se o grafo tem ciclo e False caso contrario
+  // baseado na busca em largura"""
+  // desc = [0 for v in range(self.num_vert)]
+  // for s in range(self.num_vert):
+  // if desc[s] == 0:
+  // Q = [s]
+  // R = [s]
+  // desc[s] = 1
+  // while Q:
+  // u = Q.pop(0)
+  // for (v, w) in self.lista_adj[u]:
+  // if desc[v] == 0:
+  // Q.append(v)
+  // R.append(v)
+  // desc[v] = 1
+  // else:
+  // return True
+  // return False
 
   // algoritmo caminho minimo
   public void dijkstra(int s) {
