@@ -304,17 +304,15 @@ public class Graph {
   public void dijkstra(int s) {
     int distancia[] = new int[this.adjMatrix.length];
     int pred[] = new int[this.adjMatrix.length];
-    
-    for (int v = 0; v < desc.length; v++) {
+
+    for (int v = 0; v < distancia.length; v++) {
       distancia[v] = null;
       pred[v] = null;
     }
 
     distancia[s] = 0;
-    
+
     ArrayList<Integer> Q = new ArrayList<Integer>();
 
-    
-    
   }
 }
