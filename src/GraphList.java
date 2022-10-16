@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GraphList {
 
@@ -279,6 +280,125 @@ public class GraphList {
             str += "\n";
         }
         return str;
+    }
+
+    public int findSmaller(int dist[], boolean visit[]) {
+
+        int smaller = -1;
+
+        for (int i = 0; i < dist.length; i++) {
+            if (!visit[i] && (smaller == -1 || dist[i] < dist[smaller])) {
+                smaller = i;
+            }
+        }
+
+        return smaller;
+    }
+
+    public int[] dijkstra(int source) {
+
+        int n = this.adjList.size();
+
+        boolean visit[] = new boolean[n];
+        int dist[] = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            dist[i] = 999999;
+        }
+
+        dist[source] = 0;
+
+        for (int i = 0; i < n - 1; i++) {
+            int smaller = findSmaller(dist, visit);
+
+            visit[smaller] = true;
+
+            for (int j = 0; j < n; j++) {
+                if (this.adjList.get(smaller).get(j).getWeight() != 0 && !visit[j]
+                        && dist[smaller] != Integer.MAX_VALUE) {
+                    int novaDistancia = dist[smaller] + this.adjList.get(smaller).get(j).getWeight();
+
+                    if (novaDistancia < dist[j]) {
+                        dist[j] = novaDistancia;
+                    }
+                }
+            }
+        }
+
+        return dist;
+    }
+
+    void path(int parent[], int vertex, List<Integer> path) {
+        if (vertex < 0) {
+            return;
+        }
+
+        path(parent, parent[vertex], path);
+        path.add(vertex);
+    }
+
+    public void bf(int source, int n) {
+        int dist[] = new int[n];
+        int parent[] = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            dist[i] = 999999;
+        }
+
+        dist[source] = 0;
+
+        for (int i = 0; i < n; i++) {
+            parent[i] = -1;
+        }
+
+        for (int i = 0; i < n - 1; i++) {
+            for (Edge edge : this.edgeList) {
+                int u = edge.getSource();
+                int v = edge.getSink();
+                int w = edge.getWeight();
+
+                if (dist[u] != 999999 && dist[u] + w < dist[v]) {
+                    dist[v] = dist[u] + w;
+
+                    parent[v] = u;
+                }
+            }
+        }
+
+        for (Edge edge : this.edgeList) {
+            int u = edge.getSource();
+            int v = edge.getSink();
+            int w = edge.getWeight();
+
+            if (dist[u] != 999999 && dist[u] + w < dist[v]) {
+                System.out.println("Negative-weight cycle is found!!");
+                return;
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (i != source && dist[i] < 999999) {
+                List<Integer> path = new ArrayList<>();
+                path(parent, i, path);
+                System.out.println("The distance of vertex " + i + " from vertex " +
+                        source + " is " + dist[i] + ". Its path is " + path);
+            }
+        }
+    }
+
+    public void fw(int tam) {
+        int n = this.adjList.size();
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    int smaller = Math.min(
+                            this.adjList.get(i).get(k).getWeight() + this.adjList.get(k).get(j).getWeight(),
+                            this.adjList.get(i).get(j).getWeight());
+
+                    this.adjList.get(i).set(i, new Edge(i, k, smaller));
+                }
+            }
+        }
     }
 
 }
