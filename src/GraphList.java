@@ -148,9 +148,8 @@ public class GraphList {
         return new ArrayList<>();
     }
 
-    public boolean connected() {
-        // TDOO tarefa da parte 1
-        return false;
+   public boolean connected() {
+        return this.bfs(0).size() == this.countNodes;
     }
 
     public boolean isOriented() {
