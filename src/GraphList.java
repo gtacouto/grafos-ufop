@@ -169,6 +169,30 @@ public class GraphList {
         return R;
     }
 
+    public ArrayList<Integer> bfs(int s) {
+        int[] desc = new int[this.countNodes];
+        ArrayList<Integer> Q = new ArrayList<>();
+        Q.add(s);
+        ArrayList<Integer> R = new ArrayList<>();
+        R.add(s);
+        desc[s] = 1;
+        // Main loop
+        while (Q.size() > 0) {
+            int u = Q.remove(0);
+            for (int v = 0; v < this.adjList.get(u).get(v).getSink(); ++v) {
+                if (this.adjList.get(u).get(v).getSink() != 0) { // Edge (u, v) exists
+                    if (desc[v] == 0) {
+                        Q.add(v);
+                        R.add(v);
+                        desc[v] = 1;
+                    }
+                }
+            }
+        }
+        return R;
+
+    }
+
     public void dfsRecAux(int u, int[] desc, ArrayList<Integer> R) {
         desc[u] = 1;
         R.add(u);
