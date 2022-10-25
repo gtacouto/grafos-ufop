@@ -138,27 +138,27 @@ public class GraphList {
         return true;
     }
 
-   public boolean connected() {
+    public boolean connected() {
         return this.bfs(0).size() == this.countNodes;
     }
 
     public boolean isOriented() {
-       for (int u = 0; u < this.adjList.size(); ++u) {
-             for (int idx = 0; idx < this.adjList.get(u).size(); ++idx) {
-                 int v = this.adjList.get(u).get(idx).getSink();
-                 boolean hasEdgeVU = false;
-                 for (int idx2 = 0; idx2 < this.adjList.get(v).size(); ++idx2) {
-                     int u2 = this.adjList.get(v).get(idx2).getSink();
-                     if (u == u2) {
-                         hasEdgeVU = true;
-                         break;
-                     }
-                 }
-                 if (!hasEdgeVU) {
-                     return true;
-                 }
-             }
-         }
+        for (int u = 0; u < this.adjList.size(); ++u) {
+            for (int idx = 0; idx < this.adjList.get(u).size(); ++idx) {
+                int v = this.adjList.get(u).get(idx).getSink();
+                boolean hasEdgeVU = false;
+                for (int idx2 = 0; idx2 < this.adjList.get(v).size(); ++idx2) {
+                    int u2 = this.adjList.get(v).get(idx2).getSink();
+                    if (u == u2) {
+                        hasEdgeVU = true;
+                        break;
+                    }
+                }
+                if (!hasEdgeVU) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -341,7 +341,7 @@ public class GraphList {
         path.add(vertex);
     }
 
-    public void bf(int source, int n) {
+    public void bellmanford(int source, int n) {
         int dist[] = new int[n];
         int parent[] = new int[n];
 
@@ -390,7 +390,7 @@ public class GraphList {
         }
     }
 
-    public void fw(int tam) {
+    public void floyd_warshall(int tam) {
         int n = this.adjList.size();
         for (int k = 0; k < n; k++) {
             for (int i = 0; i < n; i++) {
