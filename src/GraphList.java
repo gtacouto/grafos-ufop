@@ -365,7 +365,7 @@ public class GraphList {
         path.add(vertex);
     }
 
-    public void bellmanford(int source, int n) {
+    public void bellmanford(int source, int n, int destiny) {
         int dist[] = new int[n];
         int parent[] = new int[n];
 
@@ -404,13 +404,12 @@ public class GraphList {
             }
         }
 
-        for (int i = 0; i < n; i++) {
-            if (i != source && dist[i] < 999999) {
-                List<Integer> path = new ArrayList<>();
-                path(parent, i, path);
-                System.out.println("The distance of vertex " + i + " from vertex " +
-                        source + " is " + dist[i] + ". Its path is " + path);
-            }
+        if (destiny != source && dist[destiny] < 999999) {
+            List<Integer> path = new ArrayList<>();
+            path(parent, destiny, path);
+            System.out.println("Caminho: " + path);
+
+            System.out.println("Custo: " + dist[destiny]);
         }
     }
 
