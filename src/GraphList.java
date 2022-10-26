@@ -323,37 +323,44 @@ public class GraphList {
         return smaller;
     }
 
-    public int[] dijkstra(int source) {
+    public void dijkstra(int s, int d) {
+        int u;
 
-        int n = this.adjList.size();
+        int minimo = this.INF;
 
-        boolean visit[] = new boolean[n];
-        int dist[] = new int[n];
+        ArrayList<Integer> dist = new ArrayList<>();
+        ArrayList<Integer> Q = new ArrayList<>();
+        ArrayList<Integer> pred = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            dist[i] = 999999;
+        for (int i = 0; i < this.countNodes; i++) {
+            Q.add(i);
+            dist.add((int) this.INF);
+            pred.add(-1);
         }
 
-        dist[source] = 0;
+        dist.set(s, 0);
 
-        for (int i = 0; i < n - 1; i++) {
-            int smaller = findSmaller(dist, visit);
+        while (Q.size() > 0) {
+            minimo = this.INF;
 
-            visit[smaller] = true;
+            u = Q.get(0);
 
-            for (int j = 0; j < n; j++) {
-                if (this.adjList.get(smaller).get(j).getWeight() != 0 && !visit[j]
-                        && dist[smaller] != Integer.MAX_VALUE) {
-                    int novaDistancia = dist[smaller] + this.adjList.get(smaller).get(j).getWeight();
+            for (int i : Q) {
+                if (dist.get(i) < minimo) {
+                    minimo = dist.get(i);
+                    u = i;
+                }
+            }
 
-                    if (novaDistancia < dist[j]) {
-                        dist[j] = novaDistancia;
-                    }
+            Q.remove(Integer.valueOf(u));
+
+            for (Edge edge : adjList.get(u)) {
+                if (dist.get(edge.getSink()) > dist.get(u) + edge.getWeight()) {
+                    dist.set(edge.getSink(), dist.get(u) + edge.getWeight());
+                    pred.set(edge.getSink(), u);
                 }
             }
         }
-
-        return dist;
     }
 
     void path(int parent[], int vertex, List<Integer> path) {
