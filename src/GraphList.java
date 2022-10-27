@@ -435,4 +435,35 @@ public class GraphList {
         }
     }
 
+    public void bellmanford_melhorado(int s, int d) {
+
+        int Inf = 9999999;
+        ArrayList<Integer> dist = new ArrayList<>();
+        ArrayList<Integer> pred = new ArrayList<>();
+        for (int i = 0; i < this.countNodes; i++) {
+            dist.add((int) Inf);
+            pred.add(-1);
+        }
+        dist.set(s, 0);
+        boolean trocou = false;
+
+        for (int i = 0; i < this.countNodes; i++) {
+            trocou = false;
+            for (int j = 0; j < this.countEdges; j++) {
+                if (dist.get(edgeList.get(j).getSink()) > dist.get(edgeList.get(j).getSource())
+                        + edgeList.get(j).getWeight()) {
+                    dist.set(edgeList.get(j).getSink(),
+                            dist.get(edgeList.get(j).getSource()) + edgeList.get(j).getWeight());
+                    pred.set(edgeList.get(j).getSink(), edgeList.get(j).getSource());
+                    trocou = true;
+                }
+            }
+            if (trocou == false) {
+                break;
+            }
+
+        }
+
+    }
+
 }
